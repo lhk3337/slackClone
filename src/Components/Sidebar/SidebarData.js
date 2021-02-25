@@ -8,10 +8,10 @@ import PeopleIcon from "@material-ui/icons/People";
 import AppsIcon from "@material-ui/icons/Apps";
 
 export const sidebarItems = [
-  { icon: <MessageIcon />, text: "Thread" },
-  { icon: <InboxIcon />, text: "All DMs" },
-  { icon: <DraftsIcon />, text: "Mentions & Reactions" },
-  { icon: <BookmarkBorderIcon />, text: "Save Items" },
-  { icon: <PeopleIcon />, text: "Peoples & Groups" },
-  { icon: <AppsIcon />, text: "More" },
+  { id: 1, icon: <MessageIcon />, text: "Thread" },
+  { id: 2, icon: <InboxIcon />, text: "All DMs" },
+  { id: 3, icon: <DraftsIcon />, text: "Mentions & Reactions" },
+  { id: 4, icon: <BookmarkBorderIcon />, text: "Save Items" },
+  { id: 5, icon: <PeopleIcon />, text: "Peoples & Groups" },
+  { id: 6, icon: <AppsIcon />, text: "More" },
 ];

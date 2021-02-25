@@ -87,7 +87,7 @@ const Sidebar = () => {
       </WorkspaceContainer>
       <MainChannel>
         {sidebarItems.map((item) => (
-          <MainChannelItem>
+          <MainChannelItem key={item.id}>
             {item.icon}
             {item.text}
           </MainChannelItem>
