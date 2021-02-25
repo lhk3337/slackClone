@@ -11,12 +11,14 @@ const Container = styled.div`
   grid-template-rows: 50px auto;
 `;
 
-const Routers = () => (
-  <Router>
-    <Container>
-      <Header />
-      <Main />
-    </Container>
-  </Router>
-);
+const Routers = (props) => {
+  return (
+    <Router>
+      <Container>
+        <Header />
+        <Main chats={props} />
+      </Container>
+    </Router>
+  );
+};
 export default Routers;

@@ -11,10 +11,10 @@ const MainContainer = styled.div`
   grid-template-columns: 260px auto;
 `;
 
-const Main = () => {
+const Main = (props) => {
   return (
     <MainContainer>
-      <Sidebar />
+      <Sidebar chats={props} />
       <Switch>
         <Route path="/" exact component={Login}></Route>
         <Route path="/chat" exact component={Chat}></Route>
