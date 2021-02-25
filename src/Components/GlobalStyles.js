@@ -5,6 +5,7 @@ ${reset};
 *{
     margin:0;
     padding:0;
+    box-sizing:border-box;
 }
 li{
     list-style:none;
@@ -14,7 +15,6 @@ a{
     color:inherit;
 }
 body{
-    box-sizing:border-box;
 }
 `;
 export default GlobalStyles;

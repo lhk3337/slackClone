@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import React from "react";
 import Login from "./Login";
-import Chat from "./Chat";
+import Chat from "./Chat/Chat";
 import Sidebar from "../Sidebar/Sidebar";
 
 const MainContainer = styled.div`
@@ -17,7 +17,7 @@ const Main = (props) => {
       <Sidebar chats={props} />
       <Switch>
         <Route path="/" exact component={Login}></Route>
-        <Route path="/chat" exact component={Chat}></Route>
+        <Route path="/chat" exact render={() => <Chat chats={props} />}></Route>
       </Switch>
     </MainContainer>
   );
