@@ -3,6 +3,30 @@ import styled from "styled-components";
 import AccessTimeIcon from "@material-ui/icons/AccessTime";
 import HelpOutlineIcon from "@material-ui/icons/HelpOutline";
 
+const Header = ({ user, signOut }) => {
+  return (
+    <Container>
+      <Main>
+        <AccessTimeIcon />
+        <SearchContainer>
+          <Search>
+            <input type="text" placeholder="검색" />
+          </Search>
+        </SearchContainer>
+        <HelpOutlineIcon />
+      </Main>
+      <UserContainer>
+        <div>{user.name}</div>
+        <UserImage onClick={signOut}>
+          <img
+            src={user.photo ? user.photo : "https://i.imgur.com/6VBx3io.png"}
+            alt=""
+          />
+        </UserImage>
+      </UserContainer>
+    </Container>
+  );
+};
 const Container = styled.div`
   background-color: #350d36;
   color: white;
@@ -50,32 +74,17 @@ const UserContainer = styled.div`
   right: 0;
 `;
 
-const UserImage = styled.img`
+const UserImage = styled.div`
   border-radius: 50%;
   margin-left: 16px;
   width: 30px;
   height: 30px;
   border: 2px solid white;
+  cursor: pointer;
+  img {
+    width: 100%;
+    border-radius: 50%;
+  }
 `;
-
-const Header = () => {
-  return (
-    <Container>
-      <Main>
-        <AccessTimeIcon />
-        <SearchContainer>
-          <Search>
-            <input type="text" placeholder="검색" />
-          </Search>
-        </SearchContainer>
-        <HelpOutlineIcon />
-      </Main>
-      <UserContainer>
-        <div>holim</div>
-        <UserImage src="https://i.imgur.com/6VBx3io.png" alt="" />
-      </UserContainer>
-    </Container>
-  );
-};
 
 export default Header;

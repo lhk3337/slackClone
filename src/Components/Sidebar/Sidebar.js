@@ -3,7 +3,57 @@ import styled from "styled-components";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import AddIcon from "@material-ui/icons/Add";
 import { sidebarItems } from "./SidebarData";
+import { useHistory } from "react-router-dom";
 import db from "../../firebase";
+
+const Sidebar = (props) => {
+  const history = useHistory();
+
+  const goToChannel = (id) => {
+    if (id) {
+      console.log(id);
+      history.push(`/chat/${id}`);
+    }
+  };
+
+  const addChannel = () => {
+    const promptName = prompt("Enter channel name");
+    if (promptName) {
+      db.collection("chat").add({ name: promptName });
+    }
+  };
+  return (
+    <Container>
+      <WorkspaceContainer>
+        <Name>Holim</Name>
+        <NewMessage>
+          <AddCircleOutlineIcon />
+        </NewMessage>
+      </WorkspaceContainer>
+      <MainChannel>
+        {sidebarItems.map((item) => (
+          <MainChannelItem key={item.id}>
+            {item.icon}
+            {item.text}
+          </MainChannelItem>
+        ))}
+      </MainChannel>
+      <ChannelsContainer>
+        <NewChannelContainer>
+          <div>Channels</div>
+          <Addicon onClick={addChannel} />
+        </NewChannelContainer>
+        <ChannelsList>
+          {props.chats.map((item) => (
+            <Channel key={item.id} onClick={() => goToChannel(item.id)}>
+              # {item.name}
+            </Channel>
+          ))}
+        </ChannelsList>
+      </ChannelsContainer>
+    </Container>
+  );
+};
 
 const Container = styled.div`
   background: #3f0e40;
@@ -79,45 +129,5 @@ const Channel = styled.div`
 const Addicon = styled(AddIcon)`
   cursor: pointer;
 `;
-
-const Sidebar = (props) => {
-  const { chats } = props.chats.chats;
-
-  const addChannel = () => {
-    const promptName = prompt("Enter channel name");
-    if (promptName) {
-      db.collection("chat").add({ name: promptName });
-    }
-  };
-  return (
-    <Container>
-      <WorkspaceContainer>
-        <Name>Holim</Name>
-        <NewMessage>
-          <AddCircleOutlineIcon />
-        </NewMessage>
-      </WorkspaceContainer>
-      <MainChannel>
-        {sidebarItems.map((item) => (
-          <MainChannelItem key={item.id}>
-            {item.icon}
-            {item.text}
-          </MainChannelItem>
-        ))}
-      </MainChannel>
-      <ChannelsContainer>
-        <NewChannelContainer>
-          <div>Channels</div>
-          <Addicon onClick={addChannel} />
-        </NewChannelContainer>
-        <ChannelsList>
-          {chats.map((item) => (
-            <Channel key={item.id}># {item.name}</Channel>
-          ))}
-        </ChannelsList>
-      </ChannelsContainer>
-    </Container>
-  );
-};
 
 export default Sidebar;

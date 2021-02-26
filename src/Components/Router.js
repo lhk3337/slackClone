@@ -1,24 +1,36 @@
 import { BrowserRouter as Router } from "react-router-dom";
 import styled from "styled-components";
-
+import React, { useState } from "react";
 import Header from "./Header/Header";
 import Main from "./Main/Main";
-const Container = styled.div`
-  width: 100%;
-  height: 100vh;
+import Login from "./Login/Login";
+import { auth } from "../firebase";
 
-  display: grid;
-  grid-template-rows: 50px auto;
-`;
+const Routers = () => {
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
 
-const Routers = (props) => {
+  const signOut = () => {
+    auth.signOut().then(() => {
+      setUser(null);
+    });
+  };
   return (
     <Router>
-      <Container>
-        <Header />
-        <Main chats={props} />
-      </Container>
+      {!user ? (
+        <Login setUser={setUser} />
+      ) : (
+        <Container>
+          <Header signOut={signOut} user={user} />
+          <Main user={user} />
+        </Container>
+      )}
     </Router>
   );
 };
+const Container = styled.div`
+  width: 100%;
+  height: 100vh;
+  display: grid;
+  grid-template-rows: 50px minmax(0, 1fr);
+`;
 export default Routers;
